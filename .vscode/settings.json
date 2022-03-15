@@ -1,0 +1,10 @@
+{
+  "editor.tabSize": 2,
+  "files.associations": {
+      "*.vue": "vue"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
+}
