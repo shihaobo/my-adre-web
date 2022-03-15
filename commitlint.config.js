@@ -4,7 +4,7 @@
 * body?
 * footer?
 
-* 注意：冒号前面是需要一个空格的, 带 ？ 表示非必填信息
+* 注意：冒号后面是需要一个空格的, 带 ？ 表示非必填信息
 
 * scope 指 commit 的范围（哪些模块进行了修改）
 * subject 指 commit 的简短描述
@@ -27,4 +27,21 @@
 */
 module.exports = {
   extends: ["@commitlint/config-conventional"],
+  rules: {
+    "type-enum": [
+      2,
+      "always",
+      [
+        "build",
+        "dev",
+        "feat",
+        "fix",
+        "refactor",
+        "docs",
+        "chore",
+        "style",
+        "revert",
+      ],
+    ],
+  },
 };
