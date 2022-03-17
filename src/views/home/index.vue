@@ -20,3 +20,9 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+@import "@/style/variables";
+div {
+  font-size: @font-size-xxl;
+}
+</style>
