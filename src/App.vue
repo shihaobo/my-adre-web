@@ -3,7 +3,18 @@
     <router-view />
   </div>
 </template>
+<script>
+import { mapActions } from "vuex";
 
+export default {
+  mounted() {
+    this.setMenuList();
+  },
+  methods: {
+    ...mapActions("common", ["setMenuList"]),
+  },
+};
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

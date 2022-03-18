@@ -1,17 +1,17 @@
 const Mock = require("mockjs");
 
-const data = Mock.mock({
-  "items|30": [
-    {
-      id: "@id",
-      title: "@sentence(10, 20)",
-      "status|1": ["published", "draft", "deleted"],
-      author: "name",
-      display_time: "@datetime",
-      pageviews: "@integer(300, 5000)",
-    },
-  ],
-});
+// const data = Mock.mock({
+//   "items|30": [
+//     {
+//       id: "@id",
+//       title: "@sentence(10, 20)",
+//       "status|1": ["published", "draft", "deleted"],
+//       author: "name",
+//       display_time: "@datetime",
+//       pageviews: "@integer(300, 5000)",
+//     },
+//   ],
+// });
 
 module.exports = [
   {
@@ -27,7 +27,7 @@ module.exports = [
     },
   },
   {
-    url: "/api/list",
+    url: "/cadre/getMenuList",
     method: "get",
     proxy: true, // 是否使用mock代理
     response: {
@@ -35,18 +35,31 @@ module.exports = [
       data: [
         {
           id: 1,
-          name: "shi",
+          name: "首页",
+        },
+        {
+          id: 2,
+          name: "岗位管理",
+          children: [
+            {
+              id: 3,
+              name: "岗位库",
+            },
+            {
+              id: 4,
+              name: "岗级管理",
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: "薪点配置",
+        },
+        {
+          id: 6,
+          name: "审批卑职",
         },
       ],
-    },
-  },
-  {
-    url: "/api/list111",
-    method: "get",
-    proxy: true, // 是否使用mock代理
-    response: {
-      stat: 1,
-      data: data,
     },
   },
 ];

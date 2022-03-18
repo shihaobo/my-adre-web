@@ -1,7 +1,7 @@
 import common from "./common.js";
 
 const api = {
-  common,
+  ...common,
 };
 
 export default api;

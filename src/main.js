@@ -3,8 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import TDesign from "tdesign-vue";
-// 引入组件库全局样式资源
+
 import "tdesign-vue/es/style/index.css";
+import "@/style/index.less";
 
 Vue.use(TDesign);
 
