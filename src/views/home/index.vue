@@ -1,5 +1,7 @@
 <template>
-  <div class="home">1111</div>
+  <div class="home">
+    <base-list />
+  </div>
 </template>
 
 <script>
