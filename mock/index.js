@@ -1,7 +1,9 @@
 // const Mock = require("mockjs");
 
 const user = require("./user");
-const mocks = [...user];
+const home = require("./home");
+const mocks = [...user, ...home];
+
 module.exports = function ({ app }) {
   mocks.forEach((mock) => {
     if (mock.proxy) {

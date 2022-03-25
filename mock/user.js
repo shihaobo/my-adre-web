@@ -36,6 +36,7 @@ module.exports = [
         {
           id: 1,
           name: "首页",
+          path: "/",
         },
         {
           id: 2,
@@ -44,6 +45,7 @@ module.exports = [
             {
               id: 3,
               name: "岗位库",
+              path: "/job-library",
             },
             {
               id: 4,

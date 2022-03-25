@@ -6,11 +6,12 @@
           v-for="subItem in item.children"
           :key="subItem.id"
           :value="subItem.id"
+          :to="subItem.path"
         >
           {{ subItem.name }}
         </t-menu-item>
       </t-submenu>
-      <t-menu-item v-else :key="item.id" :value="item.id">
+      <t-menu-item v-else :key="item.id" :value="item.id" :to="item.path">
         <template #icon>
           <icon name="user-circle" />
         </template>
@@ -51,6 +52,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.layout-aside {
+@import "@/style/variables";
+
+.t-default-menu .t-menu__item.t-is-active:not(.t-is-opened) {
+  background-color: @brand-color-1;
+  color: @brand-color;
+  .t-icon {
+    color: @brand-color;
+  }
 }
 </style>

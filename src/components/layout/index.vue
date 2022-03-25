@@ -1,14 +1,14 @@
 <template>
-  <div class="sany-layout">
+  <div class="app-wrapper">
     <layout-header />
-    <t-layout>
-      <t-aside>
-        <layout-aside />
-      </t-aside>
-      <t-content>
-        <router-view />
-      </t-content>
-    </t-layout>
+    <div class="app-main">
+      <layout-aside />
+      <div class="app-content">
+        <transition name="fade" mode="out-in">
+          <router-view />
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -25,10 +25,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.sany-layout {
-  .t-layout {
+@import "@/style/variables";
+.app-wrapper {
+  .app-main {
+    display: flex;
     height: calc(100vh - 64px);
+    background: #f4f2f2;
+  }
+  .app-content {
+    flex: 1;
+    padding: 50px 34px 37px 28px;
     overflow-y: scroll;
+    .fade-leave-active,
+    .fade-enter-active {
+      transition: opacity @anim-duration-slow @anim-time-fn-easing;
+    }
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
   }
 }
 </style>

@@ -3,7 +3,6 @@ module.exports = defineConfig({
   transpileDependencies: true,
   productionSourceMap: false,
   devServer: {
-    host: "0.0.0.0",
     port: "8090",
     onBeforeSetupMiddleware: require("./mock/index.js"),
     // proxy: {
