@@ -42,7 +42,7 @@ export default {
   display: flex;
   align-items: center;
   height: 68px;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid @border-color;
   .logo {
     width: 146px;
     height: 33px;
@@ -64,7 +64,7 @@ export default {
       p {
         margin-left: 7px;
         font-size: @font-size-l;
-        color: #646464;
+        color: @text-color-1;
       }
     }
   }
@@ -81,15 +81,14 @@ export default {
   p {
     line-height: 20px;
     margin-bottom: 4px;
-    color: #5d5d5d;
-    &.name {
-      color: #121212;
+    &:not(.name) {
+      color: @text-color-1;
     }
   }
   .footer {
     margin-top: 10px;
     padding: 16px;
-    border-top: 0.5px solid #d8d8d8;
+    border-top: 0.5px solid @border-color;
   }
 }
 </style>

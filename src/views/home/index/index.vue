@@ -1,22 +1,17 @@
 <template>
   <div class="home">
     <div class="select-flow">
-      <h3>选择流程</h3>
+      <h3>选择流程<i class="iconfont icon-dashboard"></i></h3>
       <ul>
         <li
-          v-for="item in flowIcon"
+          v-for="item in flowItem"
           :key="item.id"
           :class="{ active: item.active }"
           @mouseover="item.active = true"
           @mouseout="item.active = false"
+          @click="handleFlow(item)"
         >
-          <img
-            :src="
-              require(`@/assets/home-icon${item.id}${
-                item.active ? '-active' : ''
-              }.png`)
-            "
-          />
+          <img :src="require(`@/assets/home-icon${item.id}.png`)" />
           <p>{{ item.title }}</p>
         </li>
       </ul>
@@ -40,34 +35,28 @@
 </template>
 
 <script>
-import { filterData, columns } from "./config/index";
+import { flowItem, filterData, columns } from "./config/index";
 import api from "@/api/index.js";
 
 export default {
   name: "home-index",
   data() {
     return {
-      flowIcon: [],
+      flowItem,
       filterData,
       columns,
       tableData: [],
     };
   },
-  created() {
-    this.setFlowIcon();
-  },
+  created() {},
   mounted() {
     this.getList();
   },
   methods: {
-    setFlowIcon() {
-      for (let i = 1; i < 2; i++) {
-        this.flowIcon.push({
-          id: i,
-          active: false,
-          title: "晋升",
-        });
-      }
+    handleFlow(item) {
+      this.$router.push({
+        path: item.path,
+      });
     },
     getList() {
       api.home.getProcessList().then((res) => {
@@ -81,11 +70,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import "@/style/variables";
+
 h3 {
   padding: 0 32px 8px;
   font-size: 28px;
   font-weight: 500;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid @border-color;
 }
 .select-flow {
   padding: 16px 0 32px;
@@ -99,7 +90,7 @@ h3 {
       width: 130px;
       text-align: center;
       &.active {
-        color: #2a65ff;
+        color: @brand-color;
       }
       img {
         width: 130px;

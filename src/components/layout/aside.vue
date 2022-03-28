@@ -13,7 +13,7 @@
       </t-submenu>
       <t-menu-item v-else :key="item.id" :value="item.id" :to="item.path">
         <template #icon>
-          <icon name="user-circle" />
+          <i :class="['iconfont', `icon-${item.icon}`]"></i>
         </template>
         {{ item.name }}
       </t-menu-item>
@@ -57,8 +57,8 @@ export default {
 .t-default-menu .t-menu__item.t-is-active:not(.t-is-opened) {
   background-color: @brand-color-1;
   color: @brand-color;
-  .t-icon {
-    color: @brand-color;
+  /deep/ .t-menu__content {
+    margin-left: 8px;
   }
 }
 </style>

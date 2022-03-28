@@ -37,6 +37,7 @@ module.exports = [
           id: 1,
           name: "首页",
           path: "/",
+          icon: "dashboard",
         },
         {
           id: 2,

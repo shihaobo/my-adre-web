@@ -1,3 +1,12 @@
+export const flowItem = [
+  {
+    id: 1,
+    active: false,
+    title: "晋升",
+    path: "/promote",
+  },
+];
+
 export const filterData = {
   processType: {
     type: "select",

@@ -2,9 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "../components/layout";
 
-import jobLibrary from "./modules/job-library.js";
-
-const children = [].concat(jobLibrary);
+const modulesFiles = require.context("./modules", false, /\.js$/);
+const children = modulesFiles.keys().reduce((modules, modulePath) => {
+  const value = modulesFiles(modulePath);
+  return [...modules, ...value.default];
+}, []);
 
 Vue.use(VueRouter);
 
@@ -14,14 +16,7 @@ const routes = [
     name: "index",
     redirect: "/home",
     component: Layout,
-    children: [
-      {
-        path: "home",
-        name: "home",
-        component: () => import("@/views/home/index.vue"),
-      },
-      ...children,
-    ],
+    children,
   },
 ];
 
