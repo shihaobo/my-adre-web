@@ -36,17 +36,19 @@ module.exports = [
         {
           id: 1,
           name: "首页",
-          path: "/",
-          icon: "dashboard",
+          path: "home",
+          icon: "home",
         },
         {
           id: 2,
           name: "岗位管理",
+          path: "job",
+          icon: "job",
           children: [
             {
               id: 3,
               name: "岗位库",
-              path: "/job-library",
+              path: "job-library",
             },
             {
               id: 4,
@@ -57,10 +59,12 @@ module.exports = [
         {
           id: 5,
           name: "薪点配置",
+          icon: "salary",
         },
         {
           id: 6,
-          name: "审批卑职",
+          name: "审批配置",
+          icon: "approve",
         },
       ],
     },

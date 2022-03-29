@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="select-flow">
-      <h3>选择流程<i class="iconfont icon-dashboard"></i></h3>
+      <h3>选择流程<i class="iconfont icon-a-3"></i></h3>
       <ul>
         <li
           v-for="item in flowItem"

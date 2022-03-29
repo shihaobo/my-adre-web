@@ -1,5 +1,15 @@
+@import "@/style/variables";
+
 #app {
   .t-button + .t-button {
     margin-left: 0px;
+  }
+  // 侧边栏
+  .t-default-menu .t-menu__item.t-is-active:not(.t-is-opened) {
+    background-color: @brand-color-1 !important;
+    color: @brand-color;
+    /deep/ .t-menu__content {
+      margin-left: 8px;
+    }
   }
 }

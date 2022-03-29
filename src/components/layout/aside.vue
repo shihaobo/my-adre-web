@@ -1,17 +1,25 @@
 <template>
-  <t-menu expandMutex height="550px" :collapsed="collapsed">
+  <t-menu :expandMutex="false" :collapsed="collapsed" :value="active">
     <template v-for="item in menuList">
-      <t-submenu v-if="item.children" :key="item.id" :title="item.name">
+      <t-submenu
+        v-if="item.children"
+        :key="item.id"
+        :title="item.name"
+        :value="item.path"
+      >
+        <template #icon>
+          <i :class="['iconfont', `icon-${item.icon}`]"></i>
+        </template>
         <t-menu-item
           v-for="subItem in item.children"
           :key="subItem.id"
-          :value="subItem.id"
+          :value="subItem.path"
           :to="subItem.path"
         >
           {{ subItem.name }}
         </t-menu-item>
       </t-submenu>
-      <t-menu-item v-else :key="item.id" :value="item.id" :to="item.path">
+      <t-menu-item v-else :key="item.id" :value="item.path" :to="item.path">
         <template #icon>
           <i :class="['iconfont', `icon-${item.icon}`]"></i>
         </template>
@@ -43,6 +51,15 @@ export default {
   },
   computed: {
     ...mapState("common", ["menuList"]),
+    active() {
+      const { name } = this.$route;
+      return name;
+    },
+    // expanded() {
+    //   const { name } = this.$route;
+    //   const val = name.split("-");
+    //   return val.slice(0, -1);
+    // },
   },
   methods: {
     changeCollapsed() {
@@ -52,13 +69,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import "@/style/variables";
-
-.t-default-menu .t-menu__item.t-is-active:not(.t-is-opened) {
-  background-color: @brand-color-1;
-  color: @brand-color;
-  /deep/ .t-menu__content {
-    margin-left: 8px;
-  }
+.iconfont {
+  margin-right: 8px;
 }
 </style>

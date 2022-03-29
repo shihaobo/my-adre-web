@@ -13,4 +13,10 @@ module.exports = defineConfig({
     hot: true,
     open: true,
   },
+  chainWebpack: (config) => {
+    config.plugin("html").tap((args) => {
+      args[0].title = "干部任免";
+      return args;
+    });
+  },
 });

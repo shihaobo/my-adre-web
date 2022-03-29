@@ -1,4 +1,4 @@
-# hello-vue
+# hr-cadre-web
 
 ## Project setup
 ```
