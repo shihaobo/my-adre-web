@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div class="select-flow">
-      <h3>选择流程<i class="iconfont icon-a-3"></i></h3>
+    <div class="select-flow bg-white">
+      <h3 class="first-title">选择流程</h3>
       <ul>
         <li
           v-for="item in flowItem"
@@ -16,8 +16,8 @@
         </li>
       </ul>
     </div>
-    <div class="flow-list">
-      <h3>选择流程</h3>
+    <div class="flow-list bg-white">
+      <h3 class="first-title">选择流程</h3>
       <div class="flow-list-content">
         <base-filter :filter-data="filterData" @handle-search="handleSearch" />
         <base-list :columns="columns" :data="tableData">
@@ -26,13 +26,7 @@
           </template>
           <template #operation="{ row }">
             <t-button variant="text" theme="primary">编辑</t-button>
-            <t-button
-              variant="text"
-              theme="primary"
-              @click="handleOperation(row)"
-            >
-              删除
-            </t-button>
+            <t-button variant="text" theme="primary" @click="handleOperation(row)">删除</t-button>
           </template>
         </base-list>
       </div>
@@ -52,6 +46,7 @@ export default {
       filterData,
       columns,
       tableData: [],
+      a: { a: 1 },
     };
   },
   created() {},
@@ -91,17 +86,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/style/variables";
-
-h3 {
-  line-height: 40px;
-  padding: 17px 36px 8px;
-  font-size: 28px;
-  font-weight: 500;
-  border-bottom: 1px solid @border-color;
-}
 .select-flow {
-  background: #fff;
-  border-radius: 6px;
   margin-bottom: 16px;
   ul {
     display: flex;
@@ -123,12 +108,5 @@ h3 {
       }
     }
   }
-}
-.flow-list {
-  background: #fff;
-  border-radius: 6px;
-  // &-content {
-  //   padding: 0 32px;
-  // }
 }
 </style>

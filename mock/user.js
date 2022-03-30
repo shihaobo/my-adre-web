@@ -69,4 +69,26 @@ module.exports = [
       ],
     },
   },
+  {
+    url: "/cadre/getUserInfos",
+    method: "post",
+    proxy: true, // 是否使用mock代理
+    response: {
+      stat: 1,
+      userInfoList: [
+        {
+          name: "姓名",
+          workNo: "131456",
+          post: "岗位",
+          department: "部门",
+        },
+        {
+          name: "张三",
+          workNo: "456789",
+          post: "ui工程师",
+          department: "人力资源总部",
+        },
+      ],
+    },
+  },
 ];

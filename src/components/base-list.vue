@@ -8,10 +8,7 @@
       v-bind="$attrs"
       v-on="$listeners"
     >
-      <template
-        v-for="slot in Object.keys($scopedSlots)"
-        #[slot]="{ col, row }"
-      >
+      <template v-for="slot in Object.keys($scopedSlots)" #[slot]="{ col, row }">
         <slot :name="slot" v-bind="{ col, row }"></slot>
       </template>
     </t-table>

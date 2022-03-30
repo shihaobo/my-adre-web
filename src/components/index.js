@@ -2,11 +2,7 @@ import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 
 export default (Vue) => {
-  const requireComponent = require.context(
-    "./",
-    false,
-    /base-[A-z]\w+\.(vue|js)$/
-  );
+  const requireComponent = require.context("./", false, /base-[A-z]\w+\.(vue|js)$/);
 
   requireComponent.keys().forEach((fileName) => {
     const componentConfig = requireComponent(fileName);

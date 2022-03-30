@@ -1,12 +1,7 @@
 <template>
   <t-menu :expandMutex="false" :collapsed="collapsed" :value="active">
     <template v-for="item in menuList">
-      <t-submenu
-        v-if="item.children"
-        :key="item.id"
-        :title="item.name"
-        :value="item.path"
-      >
+      <t-submenu v-if="item.children" :key="item.id" :title="item.name" :value="item.path">
         <template #icon>
           <i :class="['iconfont', `icon-${item.icon}`]"></i>
         </template>
@@ -27,11 +22,7 @@
       </t-menu-item>
     </template>
     <template #operations>
-      <icon
-        class="t-menu__operations-icon"
-        name="view-list"
-        @click.native="changeCollapsed"
-      />
+      <icon class="t-menu__operations-icon" name="view-list" @click.native="changeCollapsed" />
     </template>
   </t-menu>
 </template>

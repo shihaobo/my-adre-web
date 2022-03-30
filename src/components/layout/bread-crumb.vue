@@ -3,11 +3,10 @@
     <t-breadcrumb>
       <template v-slot:default>
         <t-breadcrumbItem v-if="isShowBack" @click="handleGoBack">
-          <arrow-left-icon />返回
+          <arrow-left-icon />
+          返回
         </t-breadcrumbItem>
-        <t-breadcrumbItem disabled :to="{ path: $route.fullPath }">{{
-          title
-        }}</t-breadcrumbItem>
+        <t-breadcrumbItem disabled :to="{ path: $route.fullPath }">{{ title }}</t-breadcrumbItem>
       </template>
       <template v-slot:separator>
         <t-divider layout="vertical" />
@@ -43,8 +42,9 @@ export default {
 
 .bread-crumb {
   .t-breadcrumb {
-    line-height: 40px;
+    padding: 16px 0 4px;
     .t-breadcrumb__item {
+      line-height: 20px;
       color: @text-color-1;
       /deep/ .t-is-disabled .t-breadcrumb__inner {
         color: @text-color-1;

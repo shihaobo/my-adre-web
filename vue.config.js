@@ -5,11 +5,13 @@ module.exports = defineConfig({
   devServer: {
     port: "8090",
     onBeforeSetupMiddleware: require("./mock/index.js"),
-    // proxy: {
-    //   "/": {
-    //     target: "http://localhost:3000",
-    //   },
-    // },
+    proxy: {
+      "/": {
+        target: "http://10.127.215.33:7077",
+        changeOrigin: true,
+        ws: false,
+      },
+    },
     hot: true,
     open: true,
   },

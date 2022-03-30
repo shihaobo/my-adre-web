@@ -27,11 +27,7 @@
             :options="item.options"
             :keys="{ label: 'name', value: 'id' }"
           />
-          <t-input
-            v-model="item.value"
-            :placeholder="item.placeholder"
-            @change="handleInput"
-          >
+          <t-input v-model="item.value" :placeholder="item.placeholder" @change="handleInput">
             <search-icon slot="suffix-icon"></search-icon>
           </t-input>
         </t-input-group>
