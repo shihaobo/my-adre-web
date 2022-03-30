@@ -11,7 +11,7 @@
           @mouseout="item.active = false"
           @click="handleFlow(item)"
         >
-          <img :src="require(`@/assets/home-icon${item.id}.png`)" />
+          <img :src="require(`@/assets/home-icon-${item.id}.png`)" />
           <p>{{ item.title }}</p>
         </li>
       </ul>
@@ -24,9 +24,15 @@
           <template #status>
             <t-tag theme="danger" variant="light">审批中</t-tag>
           </template>
-          <template #operation>
+          <template #operation="{ row }">
             <t-button variant="text" theme="primary">编辑</t-button>
-            <t-button variant="text" theme="primary">删除</t-button>
+            <t-button
+              variant="text"
+              theme="primary"
+              @click="handleOperation(row)"
+            >
+              删除
+            </t-button>
           </template>
         </base-list>
       </div>
@@ -60,11 +66,25 @@ export default {
     },
     getList() {
       api.home.getProcessList().then((res) => {
+        console.log(res);
         this.tableData = res.data.list;
       });
     },
     handleSearch() {
       console.log("查询");
+    },
+    handleOperation(row) {
+      console.log(row, "row");
+      this.$dialog({
+        header: "提示",
+        body: "确定要删除审批流程吗",
+        className: "t-dialog-new-class1 t-dialog-new-class2",
+        style: "color: rgba(0, 0, 0, 0.6)",
+        onConfirm: ({ e }) => {
+          console.log("confirm clicked", e);
+          this.mydialog.hide();
+        },
+      });
     },
   },
 };
@@ -73,28 +93,33 @@ export default {
 @import "@/style/variables";
 
 h3 {
-  padding: 0 32px 8px;
+  line-height: 40px;
+  padding: 17px 36px 8px;
   font-size: 28px;
   font-weight: 500;
   border-bottom: 1px solid @border-color;
 }
 .select-flow {
-  padding: 16px 0 32px;
   background: #fff;
   border-radius: 6px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   ul {
     display: flex;
-    padding: 32px 32px 0;
+    flex-wrap: wrap;
+    padding: 56px 56px 44px;
     li {
-      width: 130px;
+      margin: 0 64px 16px 0;
       text-align: center;
+      cursor: pointer;
       &.active {
         color: @brand-color;
+        img {
+          box-shadow: @shadow-1;
+        }
       }
       img {
-        width: 130px;
-        height: 130px;
+        width: 106px;
+        height: 106px;
       }
     }
   }

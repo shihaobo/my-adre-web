@@ -1,4 +1,8 @@
-@import "@/style/variables";
+:root,
+:root[theme-mode='light'] {
+  // --td-text-color-primary: #191919;
+  // --td-text-color-secondary:#696969;
+}
 
 #app {
   .t-button + .t-button {
@@ -11,5 +15,9 @@
     /deep/ .t-menu__content {
       margin-left: 8px;
     }
+  }
+  // 分页
+  .t-pagination__number{
+    border-radius: 50%;
   }
 }

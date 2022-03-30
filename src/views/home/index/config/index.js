@@ -5,6 +5,54 @@ export const flowItem = [
     title: "晋升",
     path: "/promote",
   },
+  {
+    id: 2,
+    active: false,
+    title: "提名",
+    path: "",
+  },
+  {
+    id: 3,
+    active: false,
+    title: "平调",
+    path: "",
+  },
+  {
+    id: 4,
+    active: false,
+    title: "调任",
+    path: "",
+  },
+  {
+    id: 5,
+    active: false,
+    title: "兼职",
+    path: "",
+  },
+  {
+    id: 6,
+    active: false,
+    title: "停职",
+    path: "",
+  },
+  {
+    id: 7,
+    active: false,
+    title: "免职",
+    path: "",
+  },
+  {
+    id: 8,
+    active: false,
+    title: "关键岗外引发文",
+    path: "",
+  },
+  {
+    id: 9,
+    active: false,
+    title: "多流程发起",
+    path: "",
+  },
 ];
 
 export const filterData = {
