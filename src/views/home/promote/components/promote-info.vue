@@ -21,7 +21,17 @@
       </div>
       <div class="form-item">
         <t-form-item label="拟任岗位" name="appointPost">
-          <t-select v-model="formData.appointPost" :options="options1" placeholder="请选择" />
+          <select-remote
+            placeholder="请输入"
+            :keys="{ label: 'name', value: 'id' }"
+            method="getPost"
+            @change="handleAppointPost"
+          >
+            <template v-slot="item">
+              <div>{{ item.name }}</div>
+              <div>{{ item.des }}</div>
+            </template>
+          </select-remote>
         </t-form-item>
         <t-form-item label="拟任岗级" name="appointPostLevel">
           <t-select v-model="formData.appointPostLevel" :options="options1" placeholder="请选择" />
@@ -37,8 +47,13 @@
   </div>
 </template>
 <script>
+import SelectRemote from "@/components/select-remote.vue";
+
 export default {
   name: "promote-promote-info",
+  components: {
+    SelectRemote,
+  },
   data() {
     return {
       formData: {
@@ -59,6 +74,9 @@ export default {
     };
   },
   methods: {
+    handleAppointPost(value) {
+      this.formData.appointPost = value;
+    },
     handleSubmit() {
       return this.$refs.form.validate();
     },
@@ -84,6 +102,9 @@ export default {
       /deep/ .t-form__label {
         color: @text-color-1;
       }
+    }
+    /deep/ .select-remote {
+      width: 100%;
     }
   }
 }

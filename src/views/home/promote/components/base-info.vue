@@ -3,22 +3,22 @@
     <h3 class="second-title">任免信息</h3>
     <t-form :data="formData" :rules="rules" ref="form" layout="inline" labelWidth="auto">
       <t-form-item label="任免人" name="name">
-        <select-user @change="handleName"></select-user>
+        <select-remote @change="handleName"></select-remote>
       </t-form-item>
       <t-form-item label="提名人" name="nominee">
-        <select-user @change="handleNominee"></select-user>
+        <select-remote @change="handleNominee"></select-remote>
       </t-form-item>
     </t-form>
   </div>
 </template>
 <script>
 import api from "@/api/index.js";
-import SelectUser from "@/components/select-user.vue";
+import SelectRemote from "@/components/select-remote.vue";
 
 export default {
   name: "promote-base-info",
   components: {
-    SelectUser,
+    SelectRemote,
   },
   data() {
     return {
@@ -59,7 +59,7 @@ export default {
     .t-form__item {
       margin-right: 120px;
     }
-    /deep/ .select-user {
+    /deep/ .select-remote {
       width: 463px;
     }
   }

@@ -3,6 +3,7 @@
     <base-info ref="baseInfo" @handle-name="handleName"></base-info>
     <leader-info ref="userInfo" :user-info="userInfo"></leader-info>
     <promote-info ref="promoteInfo"></promote-info>
+    <salary-info ref="promoteInfo"></salary-info>
     <div class="footer">
       <t-button theme="primary" @click="handleSubmit">提交</t-button>
       <t-button variant="outline" theme="primary">保存</t-button>
@@ -14,6 +15,7 @@ import api from "@/api/index.js";
 import BaseInfo from "./components/base-info.vue";
 import LeaderInfo from "./components/leader-info.vue";
 import PromoteInfo from "./components/promote-info.vue";
+import SalaryInfo from "./components/salary-info.vue";
 
 export default {
   name: "promote-index",
@@ -21,6 +23,7 @@ export default {
     BaseInfo,
     LeaderInfo,
     PromoteInfo,
+    SalaryInfo,
   },
   data() {
     return {

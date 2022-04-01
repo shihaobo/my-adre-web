@@ -75,7 +75,7 @@ module.exports = [
     proxy: true, // 是否使用mock代理
     response: {
       stat: 1,
-      userInfoList: [
+      data: [
         {
           name: "姓名",
           workNo: "131456",
@@ -106,6 +106,21 @@ module.exports = [
         yuan: "目标",
         dangji: "党员",
       },
+    },
+  },
+  {
+    url: "/cadre/getPost",
+    method: "post",
+    proxy: true, // 是否使用mock代理
+    response: {
+      stat: 1,
+      data: [
+        {
+          id: "1",
+          name: "人资总监",
+          des: "人力资源总部，人资总监",
+        },
+      ],
     },
   },
 ];

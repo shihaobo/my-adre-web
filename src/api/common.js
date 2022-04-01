@@ -10,4 +10,7 @@ export default {
   getUserInfo() {
     return post("/cadre/getUserInfo");
   },
+  getPost() {
+    return post("/cadre/getPost");
+  },
 };

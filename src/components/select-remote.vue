@@ -1,5 +1,6 @@
 <template>
-  <div class="select-user">
+  <!-- 远程搜索用户或者其他 -->
+  <div class="select-remote">
     <t-select
       v-model="val"
       filterable
@@ -8,23 +9,26 @@
       :onSearch="getUserList"
       :loading="loading"
       :popupProps="{
-        overlayClassName: 'select-user-popup',
+        overlayClassName: 'select-remote-popup',
       }"
       v-on="$listeners"
     >
       <t-option
         v-for="item in options"
-        :value="item.workNo"
-        :label="`${item.name}（${item.workNo}）`"
+        :value="item[keys.value] || item.workNo"
+        :label="item[keys.label] || `${item.name}（${item.workNo}）`"
         :key="item.workNo"
       >
-        <div>
+        <div v-if="!isSlot">
           <p>
             {{ item.name }}
             <span>（{{ item.workNo }}）</span>
           </p>
           <p class="des">{{ item.post }}</p>
           <p class="des">{{ item.department }}</p>
+        </div>
+        <div v-else>
+          <slot v-bind="item"></slot>
         </div>
       </t-option>
     </t-select>
@@ -39,6 +43,21 @@ export default {
       type: String,
       default: "姓名或工号搜索",
     },
+    // 枚举的label和value
+    keys: {
+      type: Object,
+      default() {
+        return {
+          label: "",
+          value: "",
+        };
+      },
+    },
+    // 获取枚举的防范
+    method: {
+      type: String,
+      default: "getUserInfos",
+    },
   },
   data() {
     return {
@@ -47,11 +66,16 @@ export default {
       options: [],
     };
   },
+  computed: {
+    isSlot() {
+      return Object.keys(this.$scopedSlots).length > 0;
+    },
+  },
   mounted() {},
   methods: {
     getUserList() {
-      api.getUserInfos().then((res) => {
-        this.options = res.userInfoList;
+      api[this.method]().then((res) => {
+        this.options = res.data;
       });
     },
   },
@@ -59,7 +83,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "@/style/variables";
-.select-user-popup {
+.select-remote-popup {
   .t-select-option {
     height: auto;
     .des {
