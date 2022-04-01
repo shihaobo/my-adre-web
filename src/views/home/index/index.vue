@@ -11,7 +11,7 @@
           @mouseout="item.active = false"
           @click="handleFlow(item)"
         >
-          <img :src="require(`@/assets/home-icon-${item.id}.png`)" />
+          <img :src="require(`@/assets/home-icon-${item.id}${item.active ? '-active' : ''}.png`)" />
           <p>{{ item.title }}</p>
         </li>
       </ul>
@@ -98,9 +98,6 @@ export default {
       cursor: pointer;
       &.active {
         color: @brand-color;
-        img {
-          box-shadow: @shadow-1;
-        }
       }
       img {
         width: 106px;

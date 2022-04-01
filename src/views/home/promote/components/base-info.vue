@@ -22,7 +22,6 @@ export default {
   },
   data() {
     return {
-      loading: false,
       formData: {
         name: "",
         nominee: "",
@@ -42,9 +41,13 @@ export default {
     },
     handleName(value) {
       this.formData.name = value;
+      this.$emit("handle-name", value);
     },
     handleNominee(value) {
       this.formData.nominee = value;
+    },
+    handleSubmit() {
+      return this.$refs.form.validate();
     },
   },
 };
@@ -52,7 +55,7 @@ export default {
 <style lang="less" scoped>
 .promote-base-info {
   .t-form {
-    padding: 24px;
+    padding: 24px 36px;
     .t-form__item {
       margin-right: 120px;
     }

@@ -7,4 +7,7 @@ export default {
   getUserInfos() {
     return post("/cadre/getUserInfos");
   },
+  getUserInfo() {
+    return post("/cadre/getUserInfo");
+  },
 };

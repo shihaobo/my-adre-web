@@ -91,4 +91,21 @@ module.exports = [
       ],
     },
   },
+  {
+    url: "/cadre/getUserInfo",
+    method: "post",
+    proxy: true, // 是否使用mock代理
+    response: {
+      stat: 1,
+      data: {
+        age: "30",
+        jixiao: "A",
+        renqi: "10",
+        siling: "10",
+        xueli: "学历",
+        yuan: "目标",
+        dangji: "党员",
+      },
+    },
+  },
 ];
