@@ -69,9 +69,13 @@ export default {
 <style lang="less" scoped>
 @import "@/style/variables.less";
 .promote-salary-info {
+  margin-top: 16px;
   .t-form {
     display: flex;
     padding: 24px 36px;
+    /deep/ .t-form__label {
+      color: @text-color-1;
+    }
     .t-form__item {
       margin-right: 0;
     }

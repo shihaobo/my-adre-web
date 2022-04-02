@@ -101,7 +101,7 @@ export default {
 <style lang="less" scoped>
 @import "@/style/variables.less";
 .promote-leader-info {
-  margin-top: 12px;
+  margin-top: 16px;
   .second-title {
     display: flex;
     span {

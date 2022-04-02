@@ -4,6 +4,8 @@
     <leader-info ref="userInfo" :user-info="userInfo"></leader-info>
     <promote-info ref="promoteInfo"></promote-info>
     <salary-info ref="promoteInfo"></salary-info>
+    <reason-info ref="reasonInfo"></reason-info>
+    <letter-info ref="letterInfo"></letter-info>
     <div class="footer">
       <t-button theme="primary" @click="handleSubmit">提交</t-button>
       <t-button variant="outline" theme="primary">保存</t-button>
@@ -16,6 +18,8 @@ import BaseInfo from "./components/base-info.vue";
 import LeaderInfo from "./components/leader-info.vue";
 import PromoteInfo from "./components/promote-info.vue";
 import SalaryInfo from "./components/salary-info.vue";
+import ReasonInfo from "./components/reason-info.vue";
+import LetterInfo from "./components/letter-info.vue";
 
 export default {
   name: "promote-index",
@@ -24,6 +28,8 @@ export default {
     LeaderInfo,
     PromoteInfo,
     SalaryInfo,
+    ReasonInfo,
+    LetterInfo,
   },
   data() {
     return {

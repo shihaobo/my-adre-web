@@ -53,9 +53,13 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import "@/style/variables.less";
 .promote-base-info {
   .t-form {
     padding: 24px 36px;
+    /deep/ .t-form__label {
+      color: @text-color-1;
+    }
     .t-form__item {
       margin-right: 120px;
     }
