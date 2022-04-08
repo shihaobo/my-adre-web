@@ -37,7 +37,7 @@
 <script>
 import api from "@/api/index.js";
 export default {
-  name: "select-user",
+  name: "select-remote",
   props: {
     placeholder: {
       type: String,
@@ -53,7 +53,7 @@ export default {
         };
       },
     },
-    // 获取枚举的防范
+    // 获取枚举的api
     method: {
       type: String,
       default: "getUserInfos",

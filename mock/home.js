@@ -21,4 +21,29 @@ module.exports = [
       },
     },
   },
+  {
+    url: "/cadre/approverList",
+    method: "get",
+    proxy: true, // 是否使用mock代理
+    response: {
+      stat: 1,
+      data: [
+        {
+          id: 1,
+          name: "刘强东",
+          flow: "一级岗",
+        },
+        {
+          id: 2,
+          name: "李想",
+          flow: "分管董事",
+        },
+        {
+          id: 3,
+          name: "马上",
+          flow: "董事",
+        },
+      ],
+    },
+  },
 ];
