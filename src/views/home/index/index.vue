@@ -1,109 +1,91 @@
 <template>
-  <div class="home">
-    <div class="select-flow bg-white">
-      <h3 class="first-title">选择流程</h3>
-      <ul>
-        <li
-          v-for="item in flowItem"
-          :key="item.id"
-          :class="{ active: item.active }"
-          @mouseover="item.active = true"
-          @mouseout="item.active = false"
-          @click="handleFlow(item)"
-        >
-          <img :src="require(`@/assets/home-icon-${item.id}${item.active ? '-active' : ''}.png`)" />
-          <p>{{ item.title }}</p>
-        </li>
-      </ul>
+  <div>
+    <div>
+      <t-radio-group v-model="tableLayout" variant="default-filled">
+        <t-radio-button value="fixed">table-layout: fixed</t-radio-button>
+        <t-radio-button value="auto">table-layout: auto</t-radio-button>
+      </t-radio-group>
     </div>
-    <div class="flow-list bg-white">
-      <h3 class="first-title">选择流程</h3>
-      <div class="flow-list-content">
-        <base-filter :filter-data="filterData" @handle-search="handleSearch" />
-        <base-list :columns="columns" :data="tableData">
-          <template #status>
-            <t-tag theme="danger" variant="light">审批中</t-tag>
-          </template>
-          <template #operation="{ row }">
-            <t-button variant="text" theme="primary">编辑</t-button>
-            <t-button variant="text" theme="primary" @click="handleOperation(row)">删除</t-button>
-          </template>
-        </base-list>
-      </div>
-    </div>
+    <br />
+    <br />
+    <div><t-checkbox v-model="fixedTopAndBottomRows">是否冻结首尾两行</t-checkbox></div>
+    <br />
+    <br />
+    <!-- 如果希望表格列宽自适应，设置 `table-layout: auto` 即可。如果列字段过多超出表格宽度，还需同时设置 table-content-width -->
+    <!-- fixedRows: [2, 2] 表示冻结表格的头两行和尾两行 -->
+    <!-- footData 可以是多行，均支持固定在底部 -->
+    <t-table
+      rowKey="index"
+      :data="data"
+      :footData="[{}]"
+      :columns="columns"
+      :table-layout="tableLayout"
+      :max-height="fixedTopAndBottomRows ? 500 : 300"
+      :fixedRows="fixedTopAndBottomRows ? [2, 2] : undefined"
+      bordered
+    ></t-table>
   </div>
 </template>
-
 <script>
-import { flowItem, filterData, columns } from "./config/index";
-import api from "@/api/index.js";
-
+const data = [];
+for (let i = 0; i < 20; i++) {
+  data.push({
+    index: i,
+    platform: i % 2 === 0 ? "共有" : "私有",
+    type: ["String", "Number", "Array", "Object"][i % 4],
+    default: ["-", "0", "[]", "{}"][i % 4],
+    detail: {
+      position: `读取 ${i} 个数据的嵌套信息值`,
+    },
+    needed: i % 4 === 0 ? "是" : "否",
+    description: "数据源",
+  });
+}
 export default {
-  name: "home-index",
+  name: "a-v",
   data() {
     return {
-      flowItem,
-      filterData,
-      columns,
-      tableData: [],
-      a: { a: 1 },
-    };
-  },
-  created() {},
-  mounted() {
-    this.getList();
-  },
-  methods: {
-    handleFlow(item) {
-      this.$router.push({
-        path: item.path,
-      });
-    },
-    getList() {
-      api.home.getProcessList().then((res) => {
-        console.log(res);
-        this.tableData = res.data.list;
-      });
-    },
-    handleSearch() {
-      console.log("查询");
-    },
-    handleOperation(row) {
-      console.log(row, "row");
-      this.$dialog({
-        header: "提示",
-        body: "确定要删除审批流程吗",
-        className: "t-dialog-new-class1 t-dialog-new-class2",
-        style: "color: rgba(0, 0, 0, 0.6)",
-        onConfirm: ({ e }) => {
-          console.log("confirm clicked", e);
-          this.mydialog.hide();
+      tableLayout: "fixed",
+      // 是否冻结首尾两行
+      fixedTopAndBottomRows: false,
+      data,
+      columns: [
+        {
+          width: 120,
+          colKey: "platform",
+          title: "平台",
+          foot: "汇总",
         },
-      });
-    },
+        {
+          width: 120,
+          colKey: "type",
+          title: "类型",
+          foot: "Number(5)",
+        },
+        {
+          colKey: "default",
+          title: "默认值",
+          foot: "-",
+        },
+        {
+          colKey: "needed",
+          title: "必传",
+          foot: "否(6)",
+        },
+        {
+          colKey: "detail.position",
+          title: "详情信息",
+          width: 200,
+          ellipsis: true,
+          foot: "-",
+        },
+        {
+          colKey: "description",
+          title: "说明",
+          foot: "数据(10)",
+        },
+      ],
+    };
   },
 };
 </script>
-<style lang="less" scoped>
-@import "@/style/variables";
-.select-flow {
-  margin-bottom: 16px;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 56px 56px 44px;
-    li {
-      margin: 0 64px 16px 0;
-      text-align: center;
-      cursor: pointer;
-      &.active {
-        color: @brand-color;
-      }
-      img {
-        width: 106px;
-        height: 106px;
-      }
-    }
-  }
-}
-</style>

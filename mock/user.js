@@ -66,6 +66,12 @@ module.exports = [
           name: "审批配置",
           icon: "approve",
         },
+        {
+          id: 7,
+          name: "图表",
+          icon: "approve",
+          path: "charts",
+        },
       ],
     },
   },
