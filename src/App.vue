@@ -8,6 +8,9 @@ import { mapActions } from "vuex";
 import _ from "lodash";
 
 export default {
+  data() {},
+  computed: {},
+  watch: {},
   mounted() {
     this.setMenuList();
     let fruitSamples = [

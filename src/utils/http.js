@@ -1,16 +1,16 @@
 import axios from "axios";
 import qs from "qs";
-// import { MessagePlugin } from "tdesign-vue";
+import { MessagePlugin } from "tdesign-vue";
 import store from "@/store";
 import FileDownload from "js-file-download";
+import { logOut } from "@/utils/utils.js";
+const { VUE_APP_BASE_URL } = process.env;
 
 const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: VUE_APP_BASE_URL,
   withCredentials: true,
-  timeout: 30000,
+  timeout: 6 * 60 * 1000,
 });
-
-let urlParams = qs.parse(location.search.slice(1));
 
 // 取消重复请求start
 function generateReqKey(config) {
@@ -42,14 +42,10 @@ function removePendingRequest(config) {
 
 instance.interceptors.request.use(
   (config) => {
-    console.log(urlParams, "urlParams");
     // repeat_request：是否允许重复请求
     removePendingRequest(config);
     !config.repeat_request && addPendingRequest(config);
     config.loading && store.dispatch("common/setGlobalLoading", true);
-    if (urlParams.from === "OA" || urlParams.encryData) {
-      config.headers = store.state.common.oaSignData;
-    }
     return config;
   },
   (error) => {
@@ -65,12 +61,10 @@ instance.interceptors.response.use(
       case 200:
         return res;
       case 31602:
-        var { origin } = window.location;
-        var url = `${res.data.data}?from=${origin}${process.env.VUE_APP_WEB_BASE_URL}home`;
-        window.location.href = url;
+        logOut();
         return Promise.reject(res);
       default:
-        // MessagePlugin.error(res.data.message);
+        MessagePlugin.error(res.data.message);
         return Promise.reject(res);
     }
   },
@@ -80,7 +74,7 @@ instance.interceptors.response.use(
     if (axios.isCancel(err)) {
       console.log("已取消的重复请求：" + err.message);
     } else {
-      // MessagePlugin.error("网络异常");
+      MessagePlugin.error("网络异常");
     }
     return Promise.reject(err);
   }
@@ -177,13 +171,13 @@ export function put(url, params = {}, config) {
 export function download(url, data) {
   let params = Object.assign({}, data);
   let link = url + "?" + qs.stringify(params);
-  window.open(link, "__blank");
+  window.open(link, "__self");
 }
 
 export function download2(method = "get", url, params = {}, filename) {
   let key = method === "get" ? "params" : "data";
   let config = {
-    baseURL: process.env.VUE_APP_BASE_URL,
+    baseURL: VUE_APP_BASE_URL,
     withCredentials: true,
     timeout: 30000,
     method: method,
@@ -191,21 +185,46 @@ export function download2(method = "get", url, params = {}, filename) {
     responseType: "blob",
     [key]: params,
   };
-  if (urlParams.from === "OA") {
-    config.headers = store.state.common.oaSignData;
-  }
   axios(config).then((response) => {
-    console.log(response, "response");
     let reader = new FileReader();
     reader.readAsText(response.data);
     reader.onload = function () {
-      // let content = reader.result;
+      let content = reader.result;
       if (response.data.type === "application/json") {
-        // MessagePlugin.error(JSON.parse(content).msg);
+        MessagePlugin.error(JSON.parse(content).msg);
       } else {
         FileDownload(response.data, filename);
       }
     };
+  });
+}
+
+export function preview(method = "get", url, params = {}) {
+  let key = method === "get" ? "params" : "data";
+  let config = {
+    baseURL: VUE_APP_BASE_URL,
+    withCredentials: true,
+    timeout: 30000,
+    method: method,
+    url: url,
+    responseType: "blob",
+    [key]: params,
+  };
+  return new Promise((resolve) => {
+    axios(config).then((response) => {
+      let blob = new Blob([response.data]);
+      let url = URL.createObjectURL(blob);
+      let reader = new FileReader();
+      reader.readAsText(response.data);
+      reader.onload = function () {
+        let content = reader.result;
+        if (response.data.type === "application/json") {
+          MessagePlugin.error(JSON.parse(content).msg);
+        } else {
+          resolve(url);
+        }
+      };
+    });
   });
 }
 

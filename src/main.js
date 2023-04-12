@@ -5,10 +5,12 @@ import store from "./store";
 import TDesign from "tdesign-vue";
 import globalComponents from "@/components/index";
 
+import directive from "./directive";
+
 import "tdesign-vue/es/style/index.css";
 import "@/style/index.less";
 
-Vue.use(TDesign).use(globalComponents);
+Vue.use(TDesign).use(globalComponents).use(directive);
 
 Vue.config.productionTip = false;
 
