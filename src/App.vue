@@ -1,28 +1,65 @@
 <template>
   <div id="app">
-    <router-view />
+    <Watermark :options="watermarkOptions">
+      <t-loading :loading="Boolean(globalLoading)" fullscreen></t-loading>
+      <router-view v-if="isRouterAlive && isShowApp" />
+      <layout-skeleton v-else />
+    </Watermark>
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapState } from "vuex";
+import { Watermark } from "@pansy/vue-watermark";
+import LayoutSkeleton from "@/components/layout/skeleton.vue";
 
 export default {
-  data() {},
-  computed: {},
-  watch: {},
-  mounted() {
-    this.setMenuList();
-    let fruitSamples = [
-      { id: 1, type: "apples" },
-      { id: 2, type: "bananas" },
-      { id: 3, type: "pears" },
-      { id: 1, type: "apples" },
-    ];
-    console.log(_(fruitSamples).flatten().groupBy("type"), "type");
+  components: {
+    Watermark,
+    LayoutSkeleton,
+  },
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
+  data() {
+    return {
+      isRouterAlive: true,
+      watermarkOptions: {
+        width: 180,
+        height: 96,
+        text: "",
+      },
+    };
+  },
+  computed: {
+    ...mapState("common", ["userInfo", "isShowApp", "globalLoading"]),
+  },
+  watch: {
+    userInfo: {
+      handler(val) {
+        const { name, phoneLast4 } = val;
+        const text = `${name}  ${phoneLast4}`;
+        this.watermarkOptions.text = text;
+      },
+      deep: true,
+    },
   },
   methods: {
-    ...mapActions("common", ["setMenuList"]),
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function () {
+        this.isRouterAlive = true;
+      });
+    },
   },
 };
 </script>
+<style lang="less" scoped>
+@import url("@/style/variables");
+
+#app {
+  overflow: auto;
+  height: 100vh;
+}
+</style>
