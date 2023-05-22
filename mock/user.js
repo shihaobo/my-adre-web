@@ -19,7 +19,7 @@ module.exports = [
     method: "get",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: {
         name: "shihaobo",
         sex: "nan",
@@ -31,7 +31,7 @@ module.exports = [
     method: "get",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: [
         {
           id: 1,
@@ -80,7 +80,7 @@ module.exports = [
     method: "post",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: [
         {
           name: "姓名",
@@ -102,7 +102,7 @@ module.exports = [
     method: "post",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: {
         age: "30",
         jixiao: "A",
@@ -119,7 +119,7 @@ module.exports = [
     method: "post",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: [
         {
           id: "1",

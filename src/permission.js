@@ -6,9 +6,8 @@ import "nprogress/nprogress.css";
 
 import api from "@/api/index.js";
 import Cookies from "js-cookie";
-import { getDAes } from "./utils/crypto-js";
 import get from "lodash/get";
-import { logOut } from "@/utils/utils.js";
+// import { logOut } from "@/utils/utils.js";
 import dayjs from "dayjs";
 
 NProgress.configure({ showSpinner: false });
@@ -27,7 +26,6 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (token) {
-    const tempToken = getDAes(decodeURIComponent(token));
     Cookies.set("token", tempToken, { expires: 1 });
     Cookies.set("hr-change-token", tempToken, { expires: 1 });
   }
@@ -68,21 +66,22 @@ router.beforeEach(async (to, from, next) => {
   }
 
   //如果cookie中没有token信息跳转登录页
-  if (!tempToken && !to.name.includes("-oa") && !to.name.includes("-flybook")) {
-    logOut();
-    return next(false);
-  }
+  // if (!tempToken && !to.name.includes("-oa") && !to.name.includes("-flybook")) {
+  //   // logOut();
+  //   return next();
+  // }
   // 页面权限;
   let authList = store.state.common.authList;
   let isShowApp = store.state.common.isShowApp;
   const auth = get(to, "meta.auth", "").split("_")[0];
   if (!authList && !to.name.includes("-oa")) {
     let bool = !to.name.includes("-flybook");
-    await store.dispatch("common/setUserInfo", bool).catch(({ data }) => {
-      if (data.code === 31602) {
-        logOut();
-        return next(false);
-      }
+    console.log(store, "store");
+    await store.dispatch("common/setUserInfo", bool).catch((res) => {
+      console.log(res, "1123");
+      // if (data.code === 31602) {
+      //   return next(false);
+      // }
     });
   }
 

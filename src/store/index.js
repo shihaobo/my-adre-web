@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import persistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -18,4 +19,24 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules,
+  plugins: [
+    persistedState({
+      storage: window.sessionStorage,
+      reducer() {
+        // reducer(val) {
+        // const { change, examine } = val;
+        // const { storeUser, eduInfo } = val["become-full"];
+        return {
+          // 需要缓存的vuex
+          // change,
+          // examine,
+          // "batch-examine": val["batch-examine"],
+          // "become-full": {
+          //   storeUser,
+          //   eduInfo,
+          // },
+        };
+      },
+    }),
+  ],
 });

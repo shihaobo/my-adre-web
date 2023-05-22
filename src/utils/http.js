@@ -3,7 +3,7 @@ import qs from "qs";
 import { MessagePlugin } from "tdesign-vue";
 import store from "@/store";
 import FileDownload from "js-file-download";
-import { logOut } from "@/utils/utils.js";
+// import { logOut } from "@/utils/utils.js";
 const { VUE_APP_BASE_URL } = process.env;
 
 const instance = axios.create({
@@ -57,11 +57,12 @@ instance.interceptors.response.use(
   (res) => {
     res.config.loading && store.dispatch("common/setGlobalLoading", false);
     removePendingRequest(res.config);
+    console.log(res.data, "123");
     switch (res.data.code) {
       case 200:
         return res;
       case 31602:
-        logOut();
+        // logOut();
         return Promise.reject(res);
       default:
         MessagePlugin.error(res.data.message);

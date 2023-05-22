@@ -4,7 +4,7 @@ module.exports = [
     method: "get",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: {
         list: [
           {
@@ -26,7 +26,7 @@ module.exports = [
     method: "get",
     proxy: true, // 是否使用mock代理
     response: {
-      stat: 1,
+      code: 200,
       data: [
         {
           id: 1,

@@ -2,7 +2,7 @@
   <div id="app">
     <Watermark :options="watermarkOptions">
       <t-loading :loading="Boolean(globalLoading)" fullscreen></t-loading>
-      <router-view v-if="isRouterAlive && isShowApp" />
+      <router-view v-if="isRouterAlive" />
       <layout-skeleton v-else />
     </Watermark>
   </div>
